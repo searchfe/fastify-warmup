@@ -1,0 +1,24 @@
+{
+  "name": "fastify-warmup",
+  "version": "1.0.0",
+  "description": "fastify warmup plugin",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/searchfe/fastify-warmup.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/searchfe/fastify-warmup/issues"
+  },
+  "homepage": "https://github.com/searchfe/fastify-warmup#readme",
+  "devDependencies": {
+    "@types/node": "^14.14.37",
+    "fastify": "^3.14.2"
+  }
+}

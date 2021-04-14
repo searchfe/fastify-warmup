@@ -1,14 +1,6 @@
-# fastify-warmup
-
-fastify warmup plugin
-
-## options
-
-```ts
-interface Conf {
+export interface WarmupConf {
     [routerPath: string]: {
         dataPath: string;
         method: string;
     }
 }
-```
