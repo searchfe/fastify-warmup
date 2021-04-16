@@ -3,7 +3,7 @@ import {runTasks} from './taskRunner';
 import type {FastifyInstance} from 'fastify';
 import type {WarmupConf} from './types';
 
-export async function warmup(fastify: FastifyInstance, conf: WarmupConf) {
+export async function fastifyWarmup(fastify: FastifyInstance, conf: WarmupConf) {
     const {
         warmupData,
         maxConcurrent = Infinity,

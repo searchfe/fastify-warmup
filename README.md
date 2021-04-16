@@ -1,6 +1,43 @@
 # fastify-warmup
 
-fastify warmup plugin
+A library used to warmup fastify server before call `.listen()`;
+
+## how to use
+
+```ts
+function fastifyWarmup(fastify: FastifyInstance, conf: WarmupConf): void
+```
+
+## quick start
+
+```shell
+npm i fastify-warmup
+```
+
+```ts
+import fastify from 'fastify';
+import {fastifyWarmup} from 'fastify-warmup';
+
+const app = fastify({logger: true});
+
+(async () => {
+    app.get('/a', async (req, rep) => {
+    });
+    app.get('/b', async (req, rep) => {
+    });
+
+    // will run after fastify.ready()
+    await fastifyWarmup(app, {
+        warmupData: {
+            '/a': ['a'],
+            '/b': 'b.json'
+        },
+        basePath: 'path/to/warmupBasePath'
+    });
+
+    const address = await app.listen(3001);
+})();
+```
 
 ## options
 
@@ -12,25 +49,23 @@ interface WarmupConf {
 }
 ```
 
-其中 dataPath 中的值可以为一个目录或文件:
+The key of `warmupData` is the request url.
 
-- 当为目录时，加载该目录下的所有 .json 文件。
-- **当为一个文件时，必须以 .json 结尾。**
+the Value of `warmupData` can be a string or string[], which can represents:
 
-预热文件格式：
+- **A folder**. will load a the files with extension `.json` in that folder.
+- **A file**. **must be end with .json**
 
-```ts
-interface WarmupData {
-    method: String;
-    query: Object;
-    payload: Object;
-    headers: Object;
-    cookies: Object;
+the .json file, which is the warmup data, can be：
+
+```json
+{
+    "method": "get" | "post" | ...;
+    "query": Object;
+    "payload": Object;
+    "headers": Object;
+    "cookies": Object;
 }
 ```
 
-把 url 单独抽离出来，不放在预热数据文件中的原因：
-
-1. 预热数据产出与 server 的路径解偶。
-2. 多路径复用同一预热数据。
 

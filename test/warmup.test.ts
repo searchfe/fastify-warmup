@@ -1,5 +1,5 @@
 import fastify from 'fastify';
-import {warmup} from '../src';
+import {fastifyWarmup} from '../src';
 import path from 'path';
 import {sleep} from '../src/utils';
 
@@ -28,7 +28,7 @@ test('warmup', async () => {
         return warmup;
     });
 
-    await warmup(app, {
+    await fastifyWarmup(app, {
         warmupData: {
             '/a': ['a', 'c.json', 'd'],
             '/b': 'b.json',
@@ -40,7 +40,7 @@ test('warmup', async () => {
 
     try {
         // @ts-ignore
-        await warmup(app, {});
+        await fastifyWarmup(app, {});
     }
     catch {
         error();
