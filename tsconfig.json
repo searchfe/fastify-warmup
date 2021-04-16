@@ -1,5 +1,10 @@
 {
     "compilerOptions": {
-        "esModuleInterop": true
-    }
+        "esModuleInterop": true,
+        "target": "es2019",
+        "module": "commonjs",
+        "rootDir": "src",
+        "outDir": "dist"
+    },
+    "include": ["src"]
 }

@@ -1,5 +1,5 @@
 import fastify from 'fastify';
-import {warmup} from '../src';
+import {fastifyWarmup} from '../src';
 import path from 'path';
 import { sleep } from '../src/utils';
 
@@ -24,7 +24,7 @@ const app = fastify({
         return req.query.warmup;
     });
 
-    await warmup(app, {
+    await fastifyWarmup(app, {
         warmupData: {
             '/a': ['a'],
             '/b': 'b.json'

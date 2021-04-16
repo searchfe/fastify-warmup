@@ -4,6 +4,7 @@
   "description": "fastify warmup plugin",
   "main": "index.js",
   "scripts": {
+    "build": "tsc --build tsconfig.json",
     "test": "jest"
   },
   "repository": {
