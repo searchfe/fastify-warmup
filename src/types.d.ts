@@ -4,9 +4,8 @@ export interface WarmupConf {
     /**
      * 分成多组，每组 maxConcurrent 个
      */
-    maxConcurrent: number;
-    interval: number;
-    timeout: number;
+    maxConcurrent?: number;
+    timeout?: number;
     basePath: string;
 }
 

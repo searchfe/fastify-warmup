@@ -1,0 +1,6 @@
+{
+    "method": "get",
+    "query": {
+        "warmup": "2"
+    }
+}
