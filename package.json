@@ -4,7 +4,7 @@
   "description": "fastify warmup plugin",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -18,7 +18,11 @@
   },
   "homepage": "https://github.com/searchfe/fastify-warmup#readme",
   "devDependencies": {
+    "@jest/types": "^27.0.0-next.1",
+    "@types/jest": "^26.0.22",
     "@types/node": "^14.14.37",
-    "fastify": "^3.14.2"
+    "fastify": "^3.14.2",
+    "ts-jest": "^26.5.5",
+    "ts-node": "^9.1.1"
   }
 }

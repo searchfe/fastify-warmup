@@ -4,6 +4,7 @@ export function eachLimit<T, R>(
     limit: number
 ): Promise<R[]> {
     return new Promise((resolve, reject) => {
+        /* istanbul ignore next */
         if (!Array.isArray(items)) {
             reject('items is not array.');
         }

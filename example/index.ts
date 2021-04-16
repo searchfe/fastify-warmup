@@ -29,7 +29,7 @@ const app = fastify({
             '/a': ['a'],
             '/b': 'b.json'
         },
-        basePath: path.resolve(__dirname, './warmupData')
+        basePath: path.resolve(__dirname, '../test/warmupData')
     });
 
     const address = await app.listen(3001);

@@ -7,16 +7,17 @@ export async function warmup(fastify: FastifyInstance, conf: WarmupConf) {
     const {
         warmupData,
         maxConcurrent = Infinity,
-        timeout = Infinity,
         basePath
     } = conf;
 
+    /* istanbul ignore next */
     if (!warmupData) {
         const errorText = 'warmupData can not be undefined!';
         fastify.log.error(errorText);
         throw new Error(errorText);
     }
 
+    /* istanbul ignore next */
     if (!basePath) {
         const errorText = 'basePath can not be undefined!';
         fastify.log.error(errorText);
