@@ -1,25 +1,30 @@
+import {TaskLoader} from './taskLoader';
+import {runTasks} from './taskRunner';
 import type {FastifyInstance} from 'fastify';
 import type {WarmupConf} from './types';
-import fs from 'fs/promises';
 
-export async function warmupPlugin(fastify: FastifyInstance, conf: WarmupConf) {
+export async function warmup(fastify: FastifyInstance, conf: WarmupConf) {
     const {
         warmupData,
         maxConcurrent = Infinity,
-        timeout = Infinity
+        timeout = Infinity,
+        basePath
     } = conf;
 
     if (!warmupData) {
         const errorText = 'warmupData can not be undefined!';
-        fastify.log.fatal(errorText);
+        fastify.log.error(errorText);
         throw new Error(errorText);
     }
 
-    const res = await fastify.inject({
-        method: 'post',
-        url: '/',
-        query: {
-            someKey: 'meixg'
-        }
-    });
+    if (!basePath) {
+        const errorText = 'basePath can not be undefined!';
+        fastify.log.error(errorText);
+        throw new Error(errorText);
+    }
+
+    const taskLoader = new TaskLoader(warmupData, basePath, fastify.log);
+    const taskList = await taskLoader.run();
+
+    await runTasks(fastify, taskList, maxConcurrent);
 }
