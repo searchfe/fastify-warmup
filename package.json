@@ -1,6 +1,6 @@
 {
   "name": "fastify-warmup",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "fastify warmup plugin",
   "main": "index.js",
   "scripts": {
