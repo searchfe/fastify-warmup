@@ -1,6 +1,17 @@
 export interface WarmupConf {
-    [routerPath: string]: {
-        dataPath: string;
-        method: string;
-    }
+    warmupData: {
+        [routerPath: string]: {
+            dataPath: string[];
+        }
+    };
+    maxConcurrent: number;
+    timeout: number;
+}
+
+export interface WarmupData {
+    method: String;
+    query: Object;
+    payload: Object;
+    headers: Object;
+    cookies: Object;
 }
