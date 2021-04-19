@@ -1,5 +1,6 @@
 import {TaskLoader} from './taskLoader';
 import {runTasks} from './taskRunner';
+import Timeout from 'await-timeout';
 import type {FastifyInstance} from 'fastify';
 import type {WarmupConf} from '../types/types';
 
@@ -7,7 +8,8 @@ export async function fastifyWarmup(fastify: FastifyInstance, conf: WarmupConf) 
     const {
         warmupData,
         maxConcurrent = Infinity,
-        basePath
+        basePath,
+        timeout
     } = conf;
 
     /* istanbul ignore next */
@@ -27,7 +29,22 @@ export async function fastifyWarmup(fastify: FastifyInstance, conf: WarmupConf) 
     const taskLoader = new TaskLoader(warmupData, basePath, fastify.log);
     const taskList = await taskLoader.run();
 
-    await runTasks(fastify, taskList, maxConcurrent);
+    if (timeout) {
+        const timer = new Timeout();
+        try {
+            await Promise.race([
+                runTasks(fastify, taskList, maxConcurrent),
+                timer.set(timeout, 'warmup timeout!')
+            ]);
+        }
+        finally {
+            timer.clear();
+        }
+    }
+    else {
+        await runTasks(fastify, taskList, maxConcurrent);
+    }
+
 }
 
 export type {WarmupConf} from '../types/types';

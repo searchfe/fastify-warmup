@@ -1,7 +1,7 @@
 import fastify from 'fastify';
 import {fastifyWarmup} from '../src';
 import path from 'path';
-import {sleep} from '../src/utils';
+import Timeout from 'await-timeout';
 
 const app = fastify({});
 
@@ -15,7 +15,7 @@ test('warmup', async () => {
         const warmup = req.query.warmup as string;
 
         aStr += warmup;
-        await sleep(1000);
+        await Timeout.set(1000);
         return warmup;
     });
 
@@ -24,7 +24,7 @@ test('warmup', async () => {
         const warmup = req.query.warmup as string;
 
         bStr += warmup;
-        await sleep(500);
+        await Timeout.set(500);
         return warmup;
     });
 
@@ -38,6 +38,10 @@ test('warmup', async () => {
         basePath: path.resolve(__dirname, '../test/warmupData')
     });
 
+    expect(aStr.split('')).toContain('1');
+    expect(aStr.split('')).toContain('2');
+    expect(bStr).toBe('b');
+
     try {
         // @ts-ignore
         await fastifyWarmup(app, {});
@@ -46,8 +50,22 @@ test('warmup', async () => {
         error();
     }
 
-    expect(error).toBeCalledTimes(1);
-    expect(aStr.split('')).toContain('1');
-    expect(aStr.split('')).toContain('2');
-    expect(bStr).toBe('b');
+    try {
+        // @ts-ignore
+        await fastifyWarmup(app, {
+            warmupData: {
+                '/a': ['a', 'c.json', 'd'],
+                '/b': 'b.json',
+                '': 'b.json',
+            },
+            maxConcurrent: 3,
+            basePath: path.resolve(__dirname, '../test/warmupData'),
+            timeout: 10
+        });
+    }
+    catch {
+        error();
+    }
+
+    expect(error).toBeCalledTimes(2);
 });
