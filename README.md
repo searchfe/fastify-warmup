@@ -44,8 +44,19 @@ const app = fastify({logger: true});
 ```ts
 interface WarmupConf {
     warmupData: Record<string, string[] | string>;
-    maxConcurrent: number;
-    timeout: number;
+
+    /**
+     * warmup tasks will be split to groups
+     * [maxConcurrent]s per group
+     */
+    maxConcurrent?: number;
+    timeout?: number;
+
+    /**
+     * all the files/folders in warmupData
+     * will find based on basePath.
+     */
+    basePath: string;
 }
 ```
 

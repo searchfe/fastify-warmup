@@ -2,10 +2,16 @@ export interface WarmupConf {
     warmupData: Record<string, string[] | string>;
 
     /**
-     * 分成多组，每组 maxConcurrent 个
+     * warmup tasks will be split to groups
+     * [maxConcurrent]s per group
      */
     maxConcurrent?: number;
     timeout?: number;
+
+    /**
+     * all the files/folders in warmupData
+     * will find based on basePath.
+     */
     basePath: string;
 }
 
