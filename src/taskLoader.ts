@@ -4,7 +4,7 @@ import type {FastifyInstance} from 'fastify';
 import type {
     WarmupTask,
     WarmupConf
-} from './types';
+} from '../types/types';
 
 export class TaskLoader {
     constructor(

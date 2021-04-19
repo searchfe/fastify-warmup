@@ -1,7 +1,7 @@
 import {eachLimit} from './eachLimit';
 import fs from 'fs/promises';
 import type {FastifyInstance} from "fastify";
-import type {WarmupTask} from "./types";
+import type {WarmupTask} from "../types/types";
 
 export async function runTasks(
     fastify: FastifyInstance,

@@ -1,7 +1,7 @@
 import {TaskLoader} from './taskLoader';
 import {runTasks} from './taskRunner';
 import type {FastifyInstance} from 'fastify';
-import type {WarmupConf} from './types';
+import type {WarmupConf} from '../types/types';
 
 export async function fastifyWarmup(fastify: FastifyInstance, conf: WarmupConf) {
     const {
