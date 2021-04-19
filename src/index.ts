@@ -29,3 +29,5 @@ export async function fastifyWarmup(fastify: FastifyInstance, conf: WarmupConf) 
 
     await runTasks(fastify, taskList, maxConcurrent);
 }
+
+export type {WarmupConf} from '../types/types';
