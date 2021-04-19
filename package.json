@@ -1,8 +1,8 @@
 {
   "name": "fastify-warmup",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "fastify warmup plugin",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "tsc --build tsconfig.json",
     "test": "jest"
