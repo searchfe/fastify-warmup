@@ -1,5 +1,5 @@
 import {eachLimit} from './eachLimit';
-import fs from 'fs/promises';
+import {promises as fs} from 'fs';
 import type {FastifyInstance} from "fastify";
 import type {WarmupTask} from "../types/types";
 
