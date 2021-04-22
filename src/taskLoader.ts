@@ -1,16 +1,16 @@
 import {promises as fs} from 'fs';
 import path from 'path';
-import type {FastifyInstance} from 'fastify';
 import type {
     WarmupTask,
-    WarmupConf
+    WarmupConf,
+    FastifyInstanceLike
 } from '../types/types';
 
 export class TaskLoader {
     constructor(
         private warmupData: WarmupConf['warmupData'],
         private basePath: string,
-        private logger: FastifyInstance['log']
+        private logger: FastifyInstanceLike['log']
     ) {}
 
     async run() {

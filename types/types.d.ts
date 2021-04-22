@@ -31,6 +31,6 @@ export interface WarmupTask {
 }
 
 export type FastifyInstanceLike = FastifyInstance | {
-    log: FastifyLoggerInstance,
+    log: Partial<FastifyLoggerInstance> & Pick<FastifyLoggerInstance, 'error'>,
     inject: Function
 }
