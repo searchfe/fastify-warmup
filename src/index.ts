@@ -1,10 +1,9 @@
 import {TaskLoader} from './taskLoader';
 import {runTasks} from './taskRunner';
 import Timeout from 'await-timeout';
-import type {FastifyInstance} from 'fastify';
-import type {WarmupConf} from '../types/types';
+import type {WarmupConf, FastifyInstanceLike} from '../types/types';
 
-export async function fastifyWarmup(fastify: FastifyInstance, conf: WarmupConf) {
+export async function fastifyWarmup(fastify: FastifyInstanceLike, conf: WarmupConf) {
     const {
         warmupData,
         maxConcurrent = Infinity,

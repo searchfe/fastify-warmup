@@ -1,0 +1,7 @@
+{
+    "method": "get",
+    "query": {
+        "warmup": "array"
+    },
+    "url": "/a"
+}

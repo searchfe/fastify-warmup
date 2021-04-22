@@ -15,10 +15,18 @@ export class TaskLoader {
 
     async run() {
         let taskList: WarmupTask[] = [];
-        for (const [key, val] of Object.entries(this.warmupData)) {
-            const tasks = await this.loadTaskFromPathList(key, val);
+
+        if (typeof this.warmupData === 'string' || Array.isArray(this.warmupData)) {
+            const tasks = await this.loadTaskFromPathList('', this.warmupData);
             taskList = taskList.concat(tasks);
         }
+        else {
+            for (const [key, val] of Object.entries(this.warmupData)) {
+                const tasks = await this.loadTaskFromPathList(key, val);
+                taskList = taskList.concat(tasks);
+            }
+        }
+
         return taskList;
     }
 
@@ -36,7 +44,7 @@ export class TaskLoader {
 
     async loadTaskFromPath(url: string, dataPath: string) {
         const taskList: WarmupTask[] = [];
-        if (dataPath === '' || url === '') {
+        if (dataPath === '') {
             return taskList;
         }
 

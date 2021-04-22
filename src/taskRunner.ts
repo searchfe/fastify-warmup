@@ -1,10 +1,9 @@
 import {eachLimit} from './eachLimit';
 import {promises as fs} from 'fs';
-import type {FastifyInstance} from "fastify";
-import type {WarmupTask} from "../types/types";
+import type {WarmupTask, FastifyInstanceLike} from "../types/types";
 
 export async function runTasks(
-    fastify: FastifyInstance,
+    fastify: FastifyInstanceLike,
     taskList: WarmupTask[],
     limit: number
 ) {
@@ -12,7 +11,9 @@ export async function runTasks(
         try {
             const dataStr = await fs.readFile(task.file, 'utf-8');
             const data = JSON.parse(dataStr);
-            data.url = task.url;
+            if (task.url) {
+                data.url = task.url;
+            }
             await fastify.inject(data);
         }
         catch(e) {

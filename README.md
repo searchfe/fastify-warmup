@@ -43,7 +43,8 @@ const app = fastify({logger: true});
 
 ```ts
 interface WarmupConf {
-    warmupData: Record<string, string[] | string>;
+    warmupData: Record<string, string[] | string>
+        | (string | string[]);
 
     /**
      * warmup tasks will be split to groups
@@ -60,6 +61,8 @@ interface WarmupConf {
 }
 ```
 
+### when `warmupData` is `Record<string, string[] | string>`
+
 The key of `warmupData` is the request url.
 
 the Value of `warmupData` can be a string or string[], which can represents:
@@ -69,7 +72,7 @@ the Value of `warmupData` can be a string or string[], which can represents:
 
 the .json file, which is the warmup data, can be：
 
-```json
+```ts
 {
     "method": "get" | "post" | ...;
     "query": Object;
@@ -78,5 +81,27 @@ the .json file, which is the warmup data, can be：
     "cookies": Object;
 }
 ```
+
+### when `warmupData` is `string | string[]`
+
+`warmupData` represents:
+
+- **A folder**. will load a the files with extension `.json` in that folder.
+- **A file**. **must be end with .json**
+
+the .json file, which is the warmup data, in this case should contain url：
+
+```ts
+{
+    "method": "get" | "post" | ...;
+    "query": Object;
+    "payload": Object;
+    "headers": Object;
+    "cookies": Object;
+    "url": string
+}
+```
+
+
 
 

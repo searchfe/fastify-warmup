@@ -1,5 +1,7 @@
+import type {FastifyInstance, FastifyLoggerInstance} from 'fastify';
+
 export interface WarmupConf {
-    warmupData: Record<string, string[] | string>;
+    warmupData: Record<string, string[] | string> | string | string[];
 
     /**
      * warmup tasks will be split to groups
@@ -26,4 +28,9 @@ export interface WarmupData {
 export interface WarmupTask {
     url: string;
     file: string;
+}
+
+export type FastifyInstanceLike = FastifyInstance | {
+    log: FastifyLoggerInstance,
+    inject: Function
 }
