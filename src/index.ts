@@ -46,4 +46,4 @@ export async function fastifyWarmup(fastify: FastifyInstanceLike, conf: WarmupCo
 
 }
 
-export type {WarmupConf} from '../types/types';
+export type {WarmupConf, FastifyInstanceLike} from '../types/types';
