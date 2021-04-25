@@ -1,3 +1,10 @@
+## [0.1.1](https://github.com/searchfe/fastify-warmup/compare/v0.1.0...v0.1.1) (2021-04-25)
+
+
+### Bug Fixes
+
+* empty list will not resolve ([02fdd75](https://github.com/searchfe/fastify-warmup/commit/02fdd75a064a2b7efe1508808913353c7c4ddcc3))
+
 # [0.1.0](https://github.com/searchfe/fastify-warmup/compare/v0.0.8...v0.1.0) (2021-04-23)
 
 
