@@ -14,6 +14,10 @@ export function eachLimit<T, R>(
         let itemIndex = 0;
         let result = [] as R[];
 
+        if (items.length === 0) {
+            resolve(result);
+        }
+
         runTasks();
 
         function checkFinish() {

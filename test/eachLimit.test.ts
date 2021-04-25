@@ -17,3 +17,20 @@ test('eachLimit', async () => {
 
     expect(doneCount).toBe(items.length);
 });
+
+test('empty list', async () => {
+    let items = [];
+    let runningCount = 0;
+    let doneCount = 0;
+    await eachLimit(items, async (item) => {
+        runningCount++;
+        await Timeout.set(Math.random() * 1000);
+
+        expect(runningCount <= 3).toBe(true);
+        runningCount--;
+        doneCount++;
+        return;
+    }, 3);
+
+    expect(doneCount).toBe(items.length);
+});
